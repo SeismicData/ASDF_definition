@@ -29,3 +29,4 @@ new data format for modern seismology. It is currently divided into four parts:
    technical_details
    implementations
    use_cases
+   provenance
