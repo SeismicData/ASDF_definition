@@ -54,10 +54,11 @@ Goal of the Seismological Provenance Description
 We here do not aim for full reproducibility as too many variables affect the
 final result. Effects we do not aim to capture are for example floating point
 math difference on different machines and compilers, errors in CPU operations,
-and the like.
+and the similar hard to describe effects.
 
 **Somebody looking at data described by our provenance information should be
 able to tell what steps where taken to generate this particular piece of data
 in a qualitative fashion.**
+
 
 .. [W3C_PROV] http://www.w3.org/TR/2013/NOTE-prov-overview-20130430/
