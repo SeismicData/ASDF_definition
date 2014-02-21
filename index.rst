@@ -7,7 +7,7 @@ An Adaptable and Modern Seismic Data Format
 ===========================================
 
 This document presents the current status of an attempt to develop and define a
-new data format for modern seismology. It is currently divided into four parts:
+new data format for modern seismology. It is currently divided into five parts:
 
 1. The introduction demonstrates the necessity of a new format and gives a
    high-level overview of the format and the ideas behind it.
@@ -19,8 +19,11 @@ new data format for modern seismology. It is currently divided into four parts:
    and Fortran and the other implemented in Python with the help of the ObsPy
    framework and the HDF5 container format.
 
-4. The last part displays some use cases to demonstrate the wide range of
+4. This section displays some use cases to demonstrate the wide range of
    possible uses.
+
+5. The last part tries to define a new XML format for seismological provenance
+   information dubbed *SEIS PROV*.
 
 .. toctree::
    :maxdepth: 2
