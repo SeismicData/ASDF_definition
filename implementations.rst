@@ -36,8 +36,41 @@ The format is designed to be exchangeable and in order to facilitate adoption
 converters that take existing seismic data formats can go back and forth
 between them.
 
-How to convert SAC to ASDF
+Using the SAC library with ASDF
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The ASDF format can process waveforms using the SAC library. This is done by
+externally calling the command. An example of how to do for removing the mean for
+all waveforms in an ASDF file is given below:
+
+.. code-block:: fortran
+
+    program rmean_asdf
+    
+       type(asdf_event)          :: asdf
+
+       call initialize_asdf(rank, nproc, comm, adios_group)  
+
+       call read_asdf_file (ASDF_IN, asdf, nrecords, &
+         station, network, component, receiver_id, 0, rank, nproc, comm, ierr)
+
+       do irecord = 1, asdf%nrecords
+
+        !   Call rmean ( Removes the mean )
+        !    - data   - Original Data
+        !    - npts   - Number of points in data
+        !    - mean   - Mean value of the Original Data
+        call rmean(asdf%records(irecord)%record,&
+                asdf%npoints(irecord),&
+                mean)
+
+       enddo
+
+       call write_asdf_file (ASDF_FILE, asdf, adios_group, rank, nproc, comm, ierr)
+
+       call finialize_asdf(rank, comm)
+
+     end program rmean_asdf
 
 HDF5 and Python
 ---------------
