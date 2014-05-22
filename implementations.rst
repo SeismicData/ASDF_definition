@@ -71,6 +71,50 @@ all waveforms in an ASDF file is given below:
        call finialize_asdf(rank, comm)
 
      end program rmean_asdf
+     
+     
+Example of interpolating all seismograms in ASDF to the same sample rate
+
+.. code-block:: fortran
+
+  program interpolate_asdf
+
+  call initialize_asdf(rank, nproc, comm, adios_group)
+
+  call read_asdf_file (ASDF_FILE, asdf, nrecords, &
+    station, network, component, receiver_id, 0, rank, nproc, comm, ierr)
+    
+  do irecord = 1, asdf%nrecords
+
+  !   Call interp ( Interpolates the seismogram to a new sample rate )
+  !    - data   - Original Data
+  !    - npts   - Number of points in data
+  !    - interpolated_data   - Interpolated Data
+  !    - newlen  - Number of points in interpolated data
+  !    - beg     - Beginning time of original data
+  !    - eval    - Ending time of original data
+  !    - dt      - Sample rate of original data
+  !    - tstart  - Start time of interpolated data
+  !    - dtnew   - Sample rate of interpolated data
+  !    - eps     - Machine epsilon precision
+    call interp(asdf%records(irecord)%record,
+                asdf%npoints(irecord),&
+                asdf%records(irecord)%record,&
+                newlen,&
+                beg,&
+                eval,&
+                dt,&
+                beg,&
+                dtnew,&
+                eps)
+
+  enddo
+
+  call write_asdf_file (ASDF_FILE, asdf, adios_group, rank, nproc, comm, ierr)
+
+       call finialize_asdf(rank, comm)
+
+     end program interpolate_asdf
 
 HDF5 and Python
 ---------------
