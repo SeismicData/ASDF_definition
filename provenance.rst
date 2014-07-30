@@ -29,7 +29,7 @@ to generate that particular piece of data.
 
 For the following we will take the **process-centered** viewpoint as
 essentially all data in seismology can be described by a succession of
-different processes that created it.
+different processing steps that created it.
 
 Provenance is a kind of metainformation but there is metainformation that is
 not considered to be provenance. For example the physical location of a seismic
@@ -39,10 +39,10 @@ data recording is metadata but not provenance.
 Why it matters
 ^^^^^^^^^^^^^^
 
-Provenance is a key step towards the goal of fully reproducible research. The
-final result of many research projects are some papers describing methodology
-and results. Due to many subjective choices greatly influencing the final
-result many papers are essentially one off studies that cannot be reproduced.
+Provenance is a key step towards the goal of reproducible research. The final
+result of many research projects are some papers describing methodology and
+results. Due to many subjective choices greatly influencing the final result
+many papers are essentially one off studies that cannot be reproduced.
 Scientists need to be very disciplined if they aim for reproducible results.
 This problem only intensifies with increasing amounts of data common in modern
 research.
@@ -54,14 +54,17 @@ went into producing a particular result.
 Goal of the Seismological Provenance Description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We here do not aim for full reproducibility as too many variables affect the
+Our goal here is not full reproducibility as too many variables affect the
 final result. Effects we do not aim to capture are for example floating point
 math difference on different machines and compilers, errors in CPU operations,
-and the similar hard to describe effects.
+and similar, hard to describe effects.
 
-**Somebody looking at data described by our provenance information should be
-able to tell what steps where taken to generate this particular piece of data
-in a qualitative fashion.**
+What we strive for with our provenance description is simple:
+
+**A scientists looking at data described by our provenance information should
+be able to tell what steps where taken to generate this particular piece of
+data.**
+
 
 
 SEIS PROV
@@ -73,9 +76,9 @@ SEIS PROV
 
 `W3C PROV <http://www.w3.org/TR/2013/NOTE-prov-overview-20130430/>`_ describes
 a generic data model for provenance. It defines a number of different
-serializations for this information. As SDF already contains QuakeML and
-StationXML it just makes sense to use the XML representation known as
-`PROV-XML <http://www.w3.org/TR/prov-xml>`_ within SDF.
+serializations for this model. The seismological community is already used to
+XML with format like QuakeML and StationXML so makes sense to use the
+`PROV-XML <http://www.w3.org/TR/prov-xml>`_ serialization to ease adoption.
 
 *SEIS PROV* is the working name of a domain specific extension for using
 *W3C PROV* in the context of seismological data processing and generation.
@@ -88,70 +91,91 @@ verbose and tool support will be vital for its success.
 SEIS PROV Namespace
 ^^^^^^^^^^^^^^^^^^^
 
-The namespace for SEIS PROV extension is *http://sdf.readthedocs.org* which
-**will change** at some point. In this document we will use the **seis_prov**
-prefix to refer to it.
+The namespace of the *SEIS PROV* specific types and attributes will most likely
+change at a certain point and should be considered temporary. Always use the
+prefix **seis_prov** to refer to it.
+
+.. note::
+
+    * **prefix:** ``seis_prov``
+    * **namespace:** ``http://sdf.readthedocs.org/seis_prov/0.0/#``
+
+    The current version is **0.0** and is not stable!
+
+Approach to the Extension of W3C PROV
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+W3C PROV in theory offers ways to properly extend it with new entity types and
+relations. The downside of that approach is that most tools will not be able to
+deal with. Since we strive towards a usable and practical provenance
+description tool support is vital and should be facilitated by any means
+possible.
+
+*SEIS PROV* extends W3C PROV in a fairly non-intrusive fashion mainly by adding
+new attributes to records under the **seis_prov** namespace. This has the big
+advantage of working with existing tools for W3C PROV. The downside is that no
+standard tools like XML schemas can be used to validate *SEIS PROV* files.
 
 
-Nodes
-^^^^^
+Provenance Records
+^^^^^^^^^^^^^^^^^^
 
 *W3C PROV* in essence describes a graph consisting of different types of nodes,
 which are connected by different types of edges. There are three types of nodes
-in *W3C PROV*. We will introduce each with a short description, a plot, and an
-XML example.
+in *W3C PROV* which depict different things. The edges describe different
+relations between the nodes.
+
+We will first introduce of the three different types, each with a short
+description, a plot, an XML example, and how they are used in SEIS PROV.
 
 
-Entity
-______
+Entities
+________
 
 .. sidebar:: Entity Plot
 
-    .. image:: ./images/waveform_entity.svg
+    .. graphviz:: code/dot/entity_waveform_trace.dot
 
 
-    Entities are depicted as yellow ellipses.
+    Entities are depicted as yellow ellipses. Attributes are listed in white
+    rectangle. This example show a waveform trace at a certain point in a
+    processing chain.
 
 An entity is an actual thing with some fixed aspects. In a seismological
 context an entity is usually some piece of waveform or other data for which
 provenance is described. In a time series analysis workflow for example the
 data after each step in the processing chain will be described by an entity.
 
-*SEIS PROV* defines the *waveformDataEntity*, an entity representing waveform
-data. It is a straight extension from the default entity, in terms of an XSD
-scheme it looks like the following.
+All *SEIS_PROV* entities are normal ``prov:entity`` records with a special
+``prov:type`` attribute.
 
-.. code-block:: xml
+The most used entity in *SEIS PROV* is the ``seis_prov:waveform_trace`` entity,
+describing a single continuous piece of waveform data. *SEIS PROV* furthermore defines
+``seis_prov::cross_correlation``, ``seis_prov:cross_correlation_stack``,
+and ``seis_prov:adjoint_source`` entities.
+More entities will be added as the need arises.
 
-    <xs:complexType name="seis_prov:waveformDataEntity">
-      <xs:complexContent>
-        <xs:extension base="prov:entity">
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
+Each type of entity has a set of (optional) attributes, the
+``seis_prov:waveform_trace`` entity for example has attributes denoting the
+network, station, location, and channel SEED identifies, the starttime,
+sampling rate, the number of samples, and some more things.
 
+In the PROV XML serialization the example in the small box results in the
+following:
 
-An actual example XML which just contains a single *waveformDataEntity* looks
-like the following.
-
-.. code-block:: xml
-
-    <?xml version='1.0' encoding='UTF-8'?>
-    <prov:document xmlns:prov="http://www.w3.org/ns/prov#" xmlns:seis_prov="http://sdf.readthedocs.org">
-      <seis_prov:waveformDataEntity prov:id="waveform_data_b845bab2-e745-449b-8a9e-e195a126039d">
-        <prov:label>Waveform Data</prov:label>
-      </seis_prov:waveformDataEntity>
-    </prov:document>
+.. literalinclude:: code/xml/entity_waveform_trace.xml
+    :language: xml
 
 
-Activity
-________
+Activities
+__________
 
 .. sidebar:: Activity Plot
 
-    .. image:: ./images/activity.svg
+    .. graphviz:: ./code/dot/simple_filter_activity.dot
 
-    Activities are blue rectangles.
+    Activities are shown as blue rectangles. The example shows a simple
+    Butterworth lowpass filter.
 
 
 Activities are action that can change or generate entities. In seismological
@@ -161,42 +185,32 @@ data and generates a new version of the data.
 A further example for an activity would be a simulation run which generates
 some synthetic waveforms. Also an event relocation could be considered an
 activity but that can also be stored in the QuakeML file directly, thus an
-identifier which event was actually used should be enough.
+identifier which event was actually used should be enough. Model generation can
+be considered an activity, as can adjoint backwards simulations to generate
+gradients.
 
-Model generation can be considered an activity, as can adjoint backwards
-simulations to generate gradients. We should discuss whether we want to define
-each activity or if we just define a general activity and then let the users
-specify the details in the activities description.
+Activities can either use existing entities and generate new ones. The *SEIS
+PROV* standard defines a number of activities from common processing packages
+like SAC and ObsPy. Further activities should be added with time. While it is
+not required we **strongly recommend** to associate each activity with a
+software agent otherwise reproducibility is severely hurt.
 
-Activities can either use existing entities and generate new ones.
+A SEIS PROV example for a simple lowpass filtered graphed in box above is given
+in the following.
 
-
-A PROV XML example for an activity representing a linear detrending operation
-on some piece of waveform data is given in the following.
-
-
-
-.. code-block:: xml
-
-    <?xml version='1.0' encoding='UTF-8'?>
-    <prov:document xmlns:prov="http://www.w3.org/ns/prov#" xmlns:seis_prov="http://sdf.readthedocs.org">
-      <seis_prov:seismicProcessing prov:id="seismic_processing_detrend_c9b68e0b-7d0b-4967-babf-03e17b7a13bf">
-        <prov:label>detrend</prov:label>
-        <seis_prov:type>linear</seis_prov:type>
-      </seis_prov:seismicProcessing>
-    </prov:document>
+.. literalinclude:: code/xml/simple_filter_activity.xml
+    :language: xml
 
 
-
-Agent
-_____
+Agents
+______
 
 .. sidebar:: Agent Plot
 
-    .. image:: ./images/obspy_agent.svg
+    .. graphviz:: ./code/dot/simple_agent.dot
 
 
-    Agents are orange houses.
+    Agents are orange houses. The example shows a certain version of ObsPy.
 
 
 Agents are persons, organizations, or software programs responsible for some
@@ -205,22 +219,573 @@ the nodes. A classical example for an agent would be which software performed
 the processing and which person steered the software. It could also be a group
 of people or an institution.
 
-PROV DM already defines a software agent so we just need to define some
-additional fields we always want present within a software agent. Examples for
-this are the sofware name, the version, and the URL where to get the software.
-The following is an example of a software agent within SEIS PROV.
+*SEIS PROV* does not define any new agent types - the ones defined in W3C PROV
+are sufficient. *SEIS PROV* requires each software agent to have
+``seis_prov:software_name``, ``seis_prov:sofware_version``, and
+``seis_prov:url`` attributes. A human readable ``prov:label`` is recommended.
 
-.. code-block:: xml
+The following example PROV XML serialization is the same as in the box above.
 
-    <?xml version='1.0' encoding='UTF-8'?>
-    <prov:document xmlns:prov="http://www.w3.org/ns/prov#" xmlns:seis_prov="http://sdf.readthedocs.org">
-      <prov:softwareAgent prov:id="obspy_0.9.0_4df22acf-4ba3-411f-8666-efcc42c7dc87">
-        <prov:label>ObsPy 0.9.0</prov:label>
-        <seis_prov:softwareName>ObsPy</seis_prov:softwareName>
-        <seis_prov:softwareVersion>0.9.0</seis_prov:softwareVersion>
-        <seis_prov:URL>http://www.obspy.org</seis_prov:URL>
-      </prov:softwareAgent>
-    </prov:document>
+.. literalinclude:: code/xml/simple_agent.xml
+    :language: xml
+
+
+Relations and the Rest of W3C PROV
+__________________________________
+
+W3C PROV has a lot more to offer, everything can be used in *SEIS PROV* but
+will not be described here - please refer to the W3C PROV specification for
+more information.
+
+The different types of records described in the previous sections are tied
+together using relations. There are a number of relations in the W3C PROV data
+model, the important ones for *SEIS PROV* are:
+
+* ``Usage (used)``: Activities make use of entities, thus this is mostly used
+  to note what entities or data went into an activity.
+* ``Generation (wasGeneratedBy)``: Entities are generated by activities, thus
+  this is mostly used to show the output of an activitiy.
+* ``Association (wasAssociatedWith)``: Mostly used to show which agent is
+  responsible for a certain activitiy, e.g. which software performed the
+  filtering operation.
+* ``Delegation (actedOnBehalfOf)``: Mostly used to show what person was
+  responsible for steering a piece of software.
+
+If that is confusing it should be clearer by looking at the examples at the end
+of this page.
+
+
+Detailed Definitions
+--------------------
+
+This section details the *SEIS PROV* types and expected attributes and
+constraints.
+
+Common Properties
+^^^^^^^^^^^^^^^^^
+* All identifiers associated with *SEIS PROV* have to live in the ``seis_prov``
+  namespace. The identifiers have to be unique and the recommended form of the
+  identifiers, as a regular expression, is
+  ``seis_prov:[a-z]{2}_[A-Z0-9-]{10}`` (``seis_prov:`` followed by a two
+  letter description of the entity, activity, ..., followed by an underscore
+  and 10 uppercase alphanumeric letters.). The two letter description has the
+  purpose to yield a minimal descriptive identifier while still keeping its
+  total length fairly short. The description of each record will note the
+  recommended two letter code.
+* It is recommended to add a human readable ``prov:label`` to each entity,
+  activity, and agent. It enables the generation of more descriptive graphs
+  which will most likely be the representation that is consumed by the end
+  users.
+* In an effort to reduce the amount of text or information to parse, stations
+  are identified via their SEED identifier, e.g. the dot seperated network,
+  station, location, and channel code (NET.STA.LOC.CHA). The computational
+  power required to split the attributes again and it results in a more
+  readable definition and PROV XML file.
+
+Entities
+^^^^^^^^
+
+*SEIS_PROV* determines the type of entity via the ``prov:type`` attribute which
+can be one of the following choices. Further types will be added as requested
+by the community.
+
+* ``seis_prov:waveform_trace``: An observed or synthetic waveform trace.
+* ``seis_prov::cross_correlation``: A cross correlation between two stations.
+* ``seis_prov:cross_correlation_stack``: A stack of cross correlations.
+* ``seis_prov:adjoint_source``: An adjoint source used in adjoint simulations.
+
+
+seis_prov:waveform_trace
+________________________
+
+Represents a continuous, equally sampled observed or synthetic waveform trace.
+Most attributes are optional and can be used to describe either very detailed
+or fairly general provenance information.
+
+============================ =======
+Two letter ID code:          ``wf``
+Recommended ``prov:label``   ``Waveform Trace``
+============================ =======
+
+**Attributes**
+
+``seis_prov:station_id`` *xsd:string*
+    The SEED identifier of the recording station.
+
+``seis_prov:starttime`` *xsd:dateTime*
+    The time of the first sample in UTC.
+
+``seis_prov:number_of_samples`` *xsd:positiveInteger**
+    The number of samples in the trace.
+
+``seis_prov:sampling_rate`` *xsd:double*
+    The sampling rate of the data.
+
+``seis_prov:unit`` *xsd:string*
+    Units of the waveform data as a common abbreviation, e.g. ``m``, ``m/s``,
+    ``nm/s^2``, ...
+
+**Example**
+
+.. graphviz:: code/dot/entity_waveform_trace.dot
+
+.. literalinclude:: code/xml/entity_waveform_trace.xml
+    :language: xml
+
+seis_prov:cross_correlation
+____________________________
+
+A cross correlation between two stations A and B. Station metadata is not
+recorded here as it is part of either SEED or StationXML files. Any previously
+applied processing is also not part of the entity but rather of the entity used
+by the activity generating this one.
+
+============================ =======
+Two letter ID code:          ``cc``
+Recommended ``prov:label``   ``Cross Correlation``
+============================ =======
+
+**Attributes**
+
+``seis_prov:correlation_type`` *xsd:string*
+    The type of performed cross correlation as a string.
+
+``seis_prov:max_lag_time_in_sec`` *xsd:double*
+    The maximum lag time used during the calculation in seconds.
+
+``seis_prov:max_correlation_coefficient`` *xsd:double*
+    The maximum correlation coefficient.
+
+``seis_prov:station_id_A`` *xsd:string*
+    The SEED identifier of station A.
+
+``seis_prov:station_id_B`` *xsd:string*
+    The SEED identifier of station B.
+
+**Example**
+
+.. graphviz:: code/dot/entity_cross_correlation.dot
+
+.. literalinclude:: code/xml/entity_cross_correlation.xml
+    :language: xml
+
+
+seis_prov:cross_correlation_stack
+_________________________________
+
+A stack of cross correlations.
+
+============================ =======
+Two letter ID code:          ``cs``
+Recommended ``prov:label``   ``Cross Correlation Stack``
+============================ =======
+
+**Attributes**
+
+``seis_prov:correlation_type`` *xsd:string*
+    The type of performed cross correlations as a string. Only useful if the
+    same for all cross correlations, otherwise that information must be stored
+    in the provenance records of the single cross correlations.
+
+``seis_prov:correlation_count`` *xsd:positiveInteger*
+    The amount of cross correlations in the stack.
+
+``seis_prov:stacking_method`` *xsd:string*
+    A string describing the method used to create the stack.
+
+``seis_prov:station_id_A`` *xsd:string*
+    The SEED identifier of station A.
+
+``seis_prov:station_id_B`` *xsd:string*
+    The SEED identifier of station B.
+
+
+**Example**
+
+.. graphviz:: code/dot/entity_cross_correlation_stack.dot
+
+.. literalinclude:: code/xml/entity_cross_correlation_stack.xml
+    :language: xml
+
+
+
+seis_prov:adjoint_source
+________________________
+
+One component of an adjoint source used in adjoint simulations. The location
+can be specified either in geographical coordinates (WGS84) or as the SEED
+identifier of the corresponding station. The definition of geographic
+coordinates is the same as in StationXML. Any processing applied to the data
+before the adjoint source has been calculated (window picking, filtering, ...)
+has to be described by provenance records on the waveform entities.
+
+============================ =======
+Two letter ID code:          ``as``
+Recommended ``prov:label``   ``Adjoint Source``
+============================ =======
+
+**Attributes**
+
+
+``seis_prov:latitude`` *xsd:double*
+    The latitude of the station in WGS84.
+
+``seis_prov:longitude`` *xsd:double*
+    The longitude of the station in WGS84.
+
+``seis_prov:elevation_in_m`` *xsd:double*
+    The elevation of the station in meter above the null level on WGS84.
+
+``seis_prov:local_depth_in_m`` *xsd:double*
+    The burial of the station in meter.
+
+``seis_prov:orientation`` *xsd:string*
+    The orientation of the adjoint source, either ``N`` (north),  ``E`` (east),
+    ``Z`` (up), ``T`` (transverse), or ``R`` (radial). If that is not
+    sufficient, please use the dip and azimuth attributes.
+
+``seis_prov:dip`` *xsd:double*
+    Dip of the component in degrees, down from horizontal, same definition as
+    in StationXML.
+
+``seis_prov:azimuth`` *xsd:double*
+    Azimuth of the component in degrees from north, clockwise, same definition
+    as in StationXML.
+
+``seis_prov:station_id`` *xsd:string*
+    The id of the recording station.
+
+``seis_prov:number_of_samples`` *xsd:positiveInteger**
+    The number of samples in the trace.
+
+``seis_prov:sampling_rate`` *xsd:double*
+    The sampling rate of the data.
+
+``seis_prov:unit`` *xsd:string*
+    Units of the adjoint source as a common abbreviation, e.g. ``m``, ``m/s``,
+    ``nm/s^2``, ...
+
+``seis_prov:adjoint_source_type`` *xsd:string*
+    A string denoting the type of adjoint source.
+
+``seis_prov:adjoint_source_type_uri`` *xsd:anyURI*
+    A URI pointing to a detailed description of the adjoint source, for example
+    a DOI link to a publication.
+
+``seis_prov:misfit_value`` *xsd:double*
+    The calculation of many types of adjoint sources will automatically yield a
+    misfit value denoting the similarity of usually observed and synthetic
+    seismograms.
+
+**Example**
+
+.. graphviz:: code/dot/entity_adjoint_source.dot
+
+.. literalinclude:: code/xml/entity_adjoint_source.xml
+    :language: xml
+
+
+
+
+
+Activities
+^^^^^^^^^^
+
+*SEIS_PROV* determines the type of activity via the ``prov:type`` attribute
+which can be one of the following choices. Further types will be added as
+requested by the community.
+
+* ``seis_prov:decimate``: Downsample the waveform data by an integer factor.
+* ``seis_prov:interpolate``: Interpolate the data to new sampling points.
+* ``seis_prov:resample``: Resample the data in the frequency domain.
+
+
+* ``seis_prov:detrend``: Remove a trend from the data.
+* ``seis_prov:differentiate``: Differentiate the data with respect to time.
+* ``seis_prov:integrate``: Integrate the data with respect to time.
+
+
+* ``seis_prov:lowpass_filter``: Lowpass the data.
+* ``seis_prov:highpass_filter``: Highpass the data.
+* ``seis_prov:bandpass_filter``: Bandpass the data.
+* ``seis_prov:bandstop_filter``: Bandstop the data.
+
+
+* ``seis_prov:normalize``: Normalize the data.
+* ``seis_prov:rotate``: Rotate multi-component data.
+* ``seis_prov:taper``: Apply a taper to the data.
+
+
+* ``seis_prov:remove_response``: Remove an instrument's response.
+* ``seis_prov:simulate_response``: Add an instrument's response.
+
+
+* ``seis_prov:cut``: Cut the data resulting in a shorter trace.
+* ``seis_prov:pad``: Pad the data resulting in a longer trace.
+* ``seis_prov:merge``: Merge several traces into one.
+* ``seis_prov:split``: Split one trace into several.
+
+
+* ``seis_prov:cross_correlate``: Cross correlate data of two stations.
+* ``seis_prov:stack_cross_correlations``: Stack a number of cross correlations.
+* ``seis_prov:calculate_adjoint_source``: Calculate an adjoint source.
+
+
+seis_prov:decimate
+__________________
+
+Downsample the waveform data by an integer factor. Any applied anti-alias
+filtering has to be described by a filtering activity.
+
+============================ =======
+two letter id code:          ``dc``
+recommended ``prov:label``   ``Decimate``
+============================ =======
+
+**Attributes**
+
+``seis_prov:factor`` *xsd:positiveInteger*
+    The decimation factor.
+
+
+**Example**
+
+.. graphviz:: code/dot/activity_decimate.dot
+
+.. literalinclude:: code/xml/activity_decimate.xml
+    :language: xml
+
+
+
+seis_prov:interpolate
+_____________________
+
+Interpolate the data to new sampling points.
+
+============================ =======
+two letter id code:          ``ip``
+recommended ``prov:label``   ``Interpolate``
+============================ =======
+
+
+seis_prov:resample
+__________________
+
+Resample the data in the frequency domain.
+
+============================ =======
+two letter id code:          ``rs``
+recommended ``prov:label``   ``Resample``
+============================ =======
+
+
+seis_prov:detrend
+_________________
+
+Remove a trend from the data.
+
+============================ =======
+two letter id code:          ``dt``
+recommended ``prov:label``   ``Detrend``
+============================ =======
+
+
+seis_prov:differentiate
+_______________________
+
+Differentiate the data with respect to time.
+
+============================ =======
+two letter id code:          ``df``
+recommended ``prov:label``   ``Differentiate``
+============================ =======
+
+
+seis_prov:integrate
+___________________
+
+Integrate the data with respect to time.
+
+============================ =======
+two letter id code:          ``in``
+recommended ``prov:label``   ``Integrate``
+============================ =======
+
+
+seis_prov:lowpass_filter
+________________________
+
+Lowpass the data.
+
+============================ =======
+two letter id code:          ``lp``
+recommended ``prov:label``   ``Lowpass Filter``
+============================ =======
+
+
+seis_prov:highpass_filter
+_________________________
+
+Highpass the data.
+
+============================ =======
+two letter id code:          ``hp``
+recommended ``prov:label``   ``Highpass Filter``
+============================ =======
+
+
+seis_prov:bandpass_filter
+_________________________
+
+Bandpass the data.
+
+============================ =======
+two letter id code:          ``bp``
+recommended ``prov:label``   ``Bandpass Filter``
+============================ =======
+
+
+seis_prov:bandstop_filter
+_________________________
+
+Bandstop the data.
+
+============================ =======
+two letter id code:          ``bs``
+recommended ``prov:label``   ``Bandstop Filter``
+============================ =======
+
+
+seis_prov:normalize
+___________________
+
+Normalize the data.
+
+============================ =======
+two letter id code:          ``nm``
+recommended ``prov:label``   ``Normalize``
+============================ =======
+
+
+seis_prov:rotate
+________________
+
+Rotate multi-component data.
+
+============================ =======
+two letter id code:          ``ro``
+recommended ``prov:label``   ``Rotate``
+============================ =======
+
+
+seis_prov:taper
+_______________
+
+Apply a taper to the data.
+
+============================ =======
+two letter id code:          ``ta``
+recommended ``prov:label``   ``Taper``
+============================ =======
+
+
+seis_prov:remove_response
+_________________________
+
+Remove an instrument's response.
+
+============================ =======
+two letter id code:          ``rr``
+recommended ``prov:label``   ``Remove Response``
+============================ =======
+
+
+seis_prov:simulate_response
+___________________________
+
+Add an instrument's response.
+
+============================ =======
+two letter id code:          ``sr``
+recommended ``prov:label``   ``Simulate Response``
+============================ =======
+
+
+seis_prov:cut
+_____________
+
+Cut the data resulting in a shorter trace.
+
+============================ =======
+two letter id code:          ``cu``
+recommended ``prov:label``   ``Cut``
+============================ =======
+
+
+seis_prov:pad
+_____________
+
+Pad the data resulting in a longer trace.
+
+============================ =======
+two letter id code:          ``pa``
+recommended ``prov:label``   ``Pad``
+============================ =======
+
+
+seis_prov:merge
+_______________
+
+Merge several traces into one.
+
+============================ =======
+two letter id code:          ``me``
+recommended ``prov:label``   ``Merge``
+============================ =======
+
+
+seis_prov:split
+_______________
+
+Split one trace into several.
+
+============================ =======
+two letter id code:          ``sp``
+recommended ``prov:label``   ``Split``
+============================ =======
+
+
+seis_prov:cross_correlate
+_________________________
+
+Cross correlate data of two stations.
+
+============================ =======
+two letter id code:          ``co``
+recommended ``prov:label``   ``Cross Correlate``
+============================ =======
+
+
+seis_prov:stack_cross_correlations
+__________________________________
+
+Stack a number of cross correlations.
+
+============================ =======
+two letter id code:          ``sc``
+recommended ``prov:label``   ``Stack Cross Correlations``
+============================ =======
+
+
+seis_prov:calculate_adjoint_source
+__________________________________
+
+Calculate an adjoint source.
+
+============================ =======
+two letter id code:          ``ca``
+recommended ``prov:label``   ``Calculate Adjoint Source``
+============================ =======
 
 
 
