@@ -12,8 +12,15 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+
+import inspect
 import sys
 import os
+
+filename = os.path.abspath(inspect.getfile(inspect.currentframe()))
+folder = os.path.dirname(filename)
+
+execfile(os.path.join(folder, "code", "make_plots_and_xml.py"))
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the

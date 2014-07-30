@@ -52,7 +52,7 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 dot_and_xml:
-	python code/make_plots_and_xml.py
+	ls
 
 html: dot_and_xml
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
