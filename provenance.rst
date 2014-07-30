@@ -1235,92 +1235,12 @@ has been performed. All of these operations where performed by a certain
 version of ObsPy. Toolboxes can be adapted to provide this kind of provenance
 fully automatic.
 
-.. image:: ./images/processing_chain.svg
+.. graphviz:: code/dot/example_detailed_processing_chain.dot
 
-The corresponding XML representation.
 
-.. code-block:: xml
+.. literalinclude:: code/xml/example_detailed_processing_chain.xml
+    :language: xml
 
-    <?xml version='1.0' encoding='UTF-8'?>
-    <prov:document xmlns:prov="http://www.w3.org/ns/prov#" xmlns:seis_prov="http://sdf.readthedocs.org">
-      <prov:person prov:id="lion_krischer_cdcecaf2-eff6-4fb9-a53e-39eb5c100bc2">
-        <prov:label>Lion Krischer</prov:label>
-        <seis_prov:eMail>krischer[at]geophysik.uni-muenchen.de</seis_prov:eMail>
-        <seis_prov:institution>LMU</seis_prov:institution>
-      </prov:person>
-      <prov:softwareAgent prov:id="obspy_0.9.0_8355e390-0d9d-4bd9-aa1b-0fc8d6315caa">
-        <prov:label>ObsPy 0.9.0</prov:label>
-        <seis_prov:softwareName>ObsPy</seis_prov:softwareName>
-        <seis_prov:softwareVersion>0.9.0</seis_prov:softwareVersion>
-        <seis_prov:URL>http://www.obspy.org</seis_prov:URL>
-      </prov:softwareAgent>
-      <seis_prov:waveformDataEntity prov:id="waveform_data_f93d2570-3496-4c64-a98d-b77428945fe5">
-        <prov:label>Waveform Data</prov:label>
-      </seis_prov:waveformDataEntity>
-      <seis_prov:seismicProcessing prov:id="seismic_processing_detrend_97bbe96d-e8aa-4f82-b1bb-6e6399dfdfab">
-        <prov:label>detrend</prov:label>
-        <seis_prov:type>linear</seis_prov:type>
-      </seis_prov:seismicProcessing>
-      <seis_prov:waveformDataEntity prov:id="waveform_data_38bc6bbb-f78c-43c9-a7be-fa5db86a214b">
-        <prov:label>Waveform Data</prov:label>
-      </seis_prov:waveformDataEntity>
-      <seis_prov:seismicProcessing prov:id="seismic_processing_lowpass_filter_0930f00d-b2f2-4f95-9e28-7e63bd773579">
-        <prov:label>lowpass_filter</prov:label>
-        <seis_prov:frequency>2.0</seis_prov:frequency>
-        <seis_prov:type>Butterworth</seis_prov:type>
-        <seis_prov:order>2</seis_prov:order>
-      </seis_prov:seismicProcessing>
-      <seis_prov:waveformDataEntity prov:id="waveform_data_062c9190-1a19-4706-99ee-9a5db26f1020">
-        <prov:label>Waveform Data</prov:label>
-      </seis_prov:waveformDataEntity>
-      <seis_prov:seismicProcessing prov:id="seismic_processing_decimate_a2f3cb5e-cfdc-4367-bd55-c99001d6ca9e">
-        <prov:label>decimate</prov:label>
-        <seis_prov:factor>4</seis_prov:factor>
-      </seis_prov:seismicProcessing>
-      <seis_prov:waveformDataEntity prov:id="waveform_data_115da730-d991-4531-b333-fafe5c45f74b">
-        <prov:label>Waveform Data</prov:label>
-      </seis_prov:waveformDataEntity>
-      <prov:actedOnBehalfOf>
-        <prov:softwareAgent prov:ref="obspy_0.9.0_8355e390-0d9d-4bd9-aa1b-0fc8d6315caa"/>
-        <prov:person prov:ref="lion_krischer_cdcecaf2-eff6-4fb9-a53e-39eb5c100bc2"/>
-      </prov:actedOnBehalfOf>
-      <prov:wasAssociatedWith>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_detrend_97bbe96d-e8aa-4f82-b1bb-6e6399dfdfab"/>
-        <prov:softwareAgent prov:ref="obspy_0.9.0_8355e390-0d9d-4bd9-aa1b-0fc8d6315caa"/>
-      </prov:wasAssociatedWith>
-      <prov:used>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_detrend_97bbe96d-e8aa-4f82-b1bb-6e6399dfdfab"/>
-        <seis_prov:waveformDataEntity prov:ref="waveform_data_f93d2570-3496-4c64-a98d-b77428945fe5"/>
-      </prov:used>
-      <prov:wasGeneratedBy>
-        <seis_prov:waveformDataEntity prov:ref="waveform_data_38bc6bbb-f78c-43c9-a7be-fa5db86a214b"/>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_detrend_97bbe96d-e8aa-4f82-b1bb-6e6399dfdfab"/>
-      </prov:wasGeneratedBy>
-      <prov:wasAssociatedWith>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_lowpass_filter_0930f00d-b2f2-4f95-9e28-7e63bd773579"/>
-        <prov:softwareAgent prov:ref="obspy_0.9.0_8355e390-0d9d-4bd9-aa1b-0fc8d6315caa"/>
-      </prov:wasAssociatedWith>
-      <prov:used>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_lowpass_filter_0930f00d-b2f2-4f95-9e28-7e63bd773579"/>
-        <seis_prov:waveformDataEntity prov:ref="waveform_data_38bc6bbb-f78c-43c9-a7be-fa5db86a214b"/>
-      </prov:used>
-      <prov:wasGeneratedBy>
-        <seis_prov:waveformDataEntity prov:ref="waveform_data_062c9190-1a19-4706-99ee-9a5db26f1020"/>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_lowpass_filter_0930f00d-b2f2-4f95-9e28-7e63bd773579"/>
-      </prov:wasGeneratedBy>
-      <prov:wasAssociatedWith>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_decimate_a2f3cb5e-cfdc-4367-bd55-c99001d6ca9e"/>
-        <prov:softwareAgent prov:ref="obspy_0.9.0_8355e390-0d9d-4bd9-aa1b-0fc8d6315caa"/>
-      </prov:wasAssociatedWith>
-      <prov:used>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_decimate_a2f3cb5e-cfdc-4367-bd55-c99001d6ca9e"/>
-        <seis_prov:waveformDataEntity prov:ref="waveform_data_062c9190-1a19-4706-99ee-9a5db26f1020"/>
-      </prov:used>
-      <prov:wasGeneratedBy>
-        <seis_prov:waveformDataEntity prov:ref="waveform_data_115da730-d991-4531-b333-fafe5c45f74b"/>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_decimate_a2f3cb5e-cfdc-4367-bd55-c99001d6ca9e"/>
-      </prov:wasGeneratedBy>
-    </prov:document>
 
 Waveform Simulation
 ^^^^^^^^^^^^^^^^^^^
