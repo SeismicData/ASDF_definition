@@ -1212,6 +1212,30 @@ recommended ``prov:label``   ``Calculate Adjoint Source``
     :language: xml
 
 
+seis_prov:waveform_simulation
+_____________________________
+
+Generate data by running some numerical or analytic code. Must be associated
+with one or more agents and use some entities to achieve a useful description.
+
+============================ =======
+two letter id code:          ``ws``
+recommended ``prov:label``   ``Waveform Simulation``
+============================ =======
+
+**Attributes**
+
+This activity has no other attributes.
+
+
+**Example**
+
+.. graphviz:: code/dot/activity_waveform_simulation.dot
+
+.. literalinclude:: code/xml/activity_waveform_simulation.xml
+    :language: xml
+
+
 
 Usage Examples
 --------------
@@ -1224,6 +1248,11 @@ the origin of the data.
 
 .. note::
     `Right click -> View Image` to see graphs in more detail.
+
+.. contents::
+    :local:
+    :depth: 1
+
 
 Detailed Processing Chain
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1241,95 +1270,42 @@ fully automatic.
 .. literalinclude:: code/xml/example_detailed_processing_chain.xml
     :language: xml
 
+Schematic Processing Chain
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sometimes not all information needs to be captured for a given application and
+SEIS PROV is flexible enough to also allow a qualitative description of a
+workflow. This is the same example as above but with less information. This
+could be treated as a schema on how to process a large amount of data
+independent of the used software and actual data.
+
+.. graphviz:: code/dot/example_schematic_processing_chain.dot
+
+
+.. literalinclude:: code/xml/example_schematic_processing_chain.xml
+    :language: xml
+
 
 Waveform Simulation
 ^^^^^^^^^^^^^^^^^^^
 
-This example demonstrates the first steps towards storing provenance for a
-waveform simulation run. Some things still need to be figured out. The most
-pressing need would be to store the input files for the solvers. It would be
-possible to store them directly in the XML which should prove no issue.
+This fairly realistic example demonstrates how the waveform files resulting
+from a numerical simulation can be described. This example does use some of the
+more advanced future of the W3C PROV data model which are useful in many
+contexts. Note that the waveform simulation activity has start- and endtimes
+and that SPECFEM in this example actually has been steered by a certain person.
 
-.. image:: ./images/simulation.svg
+The amount of information to store has to be decided by the given application.
+The general idea is to store those input file parameters that actually have an
+effect on the output. It might also be useful to store information about the
+machine is was run on in the provenance information but that is not shown here.
 
-.. code-block:: xml
-
-    <?xml version='1.0' encoding='UTF-8'?>
-    <prov:document xmlns:prov="http://www.w3.org/ns/prov#" xmlns:seis_prov="http://sdf.readthedocs.org">
-      <prov:person prov:id="lion_krischer_e11660a9-4a58-445c-8abb-90d7fc4e74db">
-        <prov:label>Lion Krischer</prov:label>
-        <seis_prov:eMail>krischer[at]geophysik.uni-muenchen.de</seis_prov:eMail>
-        <seis_prov:institution>LMU</seis_prov:institution>
-      </prov:person>
-      <prov:person prov:id="james_smith_a7606f3a-e9da-4ce2-ae9b-8f702c5a8db7">
-        <prov:label>James Smith</prov:label>
-        <seis_prov:eMail>jas11[at]princeton.edu</seis_prov:eMail>
-        <seis_prov:institution>Princeton</seis_prov:institution>
-      </prov:person>
-      <prov:softwareAgent prov:id="specfem3d_globe_5.1.5_c2865c2f-09ab-4608-aa54-ed33f6b748d1">
-        <prov:label>SPECFEM3D GLOBE 5.1.5</prov:label>
-        <seis_prov:softwareName>SPECFEM3D GLOBE</seis_prov:softwareName>
-        <seis_prov:softwareVersion>5.1.5</seis_prov:softwareVersion>
-        <seis_prov:URL>http://geodynamics.org/cig/software/specfem3d_globe/</seis_prov:URL>
-      </prov:softwareAgent>
-      <seis_prov:waveformDataEntity prov:id="waveform_data_244ef893-d253-44ec-a4c1-c36ecc42db6d">
-        <prov:label>Waveform Data</prov:label>
-      </seis_prov:waveformDataEntity>
-      <seis_prov:seismicProcessing prov:id="seismic_processing_waveform_simulation_4fd26b5c-149d-4947-afe1-8aebe97e6233">
-        <prov:label>Waveform Simulation</prov:label>
-      </seis_prov:seismicProcessing>
-      <seis_prov:earthModel prov:id="earth_model_NorthAtlantic_a2c82848-cb2b-469d-b717-65948e11ae49">
-        <prov:label>Earth Model</prov:label>
-        <seis_prov:modelName>NorthAtlantic</seis_prov:modelName>
-        <seis_prov:description>Some random model.</seis_prov:description>
-      </seis_prov:earthModel>
-      <seis_prov:configFile prov:id="config_file_a5c505a9-21e9-4fbb-9e8d-a840d49b062e">
-        <prov:label>Config File</prov:label>
-        <seis_prov:filename>Par_file</seis_prov:filename>
-        <seis_prov:fileContent>PDE 2012 4 12 7 15 4...</seis_prov:fileContent>
-      </seis_prov:configFile>
-      <seis_prov:configFile prov:id="config_file_667bb515-49ee-4c54-834a-d5c27b0f26f6">
-        <prov:label>Config File</prov:label>
-        <seis_prov:filename>CMTSOLUTION</seis_prov:filename>
-      </seis_prov:configFile>
-      <seis_prov:configFile prov:id="config_file_28048f35-e117-4b7c-93c4-b325e7514e0c">
-        <prov:label>Config File</prov:label>
-        <seis_prov:filename>STATIONS</seis_prov:filename>
-      </seis_prov:configFile>
-      <prov:actedOnBehalfOf>
-        <prov:softwareAgent prov:ref="specfem3d_globe_5.1.5_c2865c2f-09ab-4608-aa54-ed33f6b748d1"/>
-        <prov:person prov:ref="lion_krischer_e11660a9-4a58-445c-8abb-90d7fc4e74db"/>
-      </prov:actedOnBehalfOf>
-      <prov:used>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_waveform_simulation_4fd26b5c-149d-4947-afe1-8aebe97e6233"/>
-        <seis_prov:configFile prov:ref="config_file_a5c505a9-21e9-4fbb-9e8d-a840d49b062e"/>
-      </prov:used>
-      <prov:used>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_waveform_simulation_4fd26b5c-149d-4947-afe1-8aebe97e6233"/>
-        <seis_prov:configFile prov:ref="config_file_667bb515-49ee-4c54-834a-d5c27b0f26f6"/>
-      </prov:used>
-      <prov:used>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_waveform_simulation_4fd26b5c-149d-4947-afe1-8aebe97e6233"/>
-        <seis_prov:configFile prov:ref="config_file_28048f35-e117-4b7c-93c4-b325e7514e0c"/>
-      </prov:used>
-      <prov:wasAssociatedWith>
-        <seis_prov:earthModel prov:ref="earth_model_NorthAtlantic_a2c82848-cb2b-469d-b717-65948e11ae49"/>
-        <prov:person prov:ref="james_smith_a7606f3a-e9da-4ce2-ae9b-8f702c5a8db7"/>
-      </prov:wasAssociatedWith>
-      <prov:used>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_waveform_simulation_4fd26b5c-149d-4947-afe1-8aebe97e6233"/>
-        <seis_prov:earthModel prov:ref="earth_model_NorthAtlantic_a2c82848-cb2b-469d-b717-65948e11ae49"/>
-      </prov:used>
-      <prov:wasGeneratedBy>
-        <seis_prov:waveformDataEntity prov:ref="waveform_data_244ef893-d253-44ec-a4c1-c36ecc42db6d"/>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_waveform_simulation_4fd26b5c-149d-4947-afe1-8aebe97e6233"/>
-      </prov:wasGeneratedBy>
-      <prov:wasAssociatedWith>
-        <seis_prov:seismicProcessing prov:ref="seismic_processing_waveform_simulation_4fd26b5c-149d-4947-afe1-8aebe97e6233"/>
-        <prov:softwareAgent prov:ref="specfem3d_globe_5.1.5_c2865c2f-09ab-4608-aa54-ed33f6b748d1"/>
-      </prov:wasAssociatedWith>
-    </prov:document>
+The implementation of this in a waveform solver is fairly simple by just using
+an existing SEIS PROV XML file as a template and adjusting the information
+dynamically. No need to incorporate an actual XML library.
 
 
-.. [W3C_PROV] http://www.w3.org/TR/2013/NOTE-prov-overview-20130430/
+.. graphviz:: code/dot/example_waveform_simulation.dot
 
+.. literalinclude:: code/xml/example_waveform_simulation.xml
+    :language: xml
