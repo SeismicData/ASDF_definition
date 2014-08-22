@@ -46,10 +46,10 @@ all waveforms in an ASDF file is given below:
 .. code-block:: fortran
 
     program rmean_asdf
-    
+
        type(asdf_event)          :: asdf
 
-       call initialize_asdf(rank, nproc, comm, adios_group)  
+       call initialize_asdf(rank, nproc, comm, adios_group)
 
        call read_asdf_file (ASDF_IN, asdf, nrecords, &
          station, network, component, receiver_id, 0, rank, nproc, comm, ierr)
@@ -71,8 +71,8 @@ all waveforms in an ASDF file is given below:
        call finialize_asdf(rank, comm)
 
      end program rmean_asdf
-     
-     
+
+
 Example of interpolating all seismograms in ASDF to the same sample rate
 
 .. code-block:: fortran
@@ -83,7 +83,7 @@ Example of interpolating all seismograms in ASDF to the same sample rate
 
   call read_asdf_file (ASDF_FILE, asdf, nrecords, &
     station, network, component, receiver_id, 0, rank, nproc, comm, ierr)
-    
+
   do irecord = 1, asdf%nrecords
 
   !   Call interp ( Interpolates the seismogram to a new sample rate )
@@ -115,7 +115,7 @@ Example of interpolating all seismograms in ASDF to the same sample rate
        call finialize_asdf(rank, comm)
 
      end program interpolate_asdf
-     
+
 Example of cutting all traces in an ASDF file
 
 .. code-block:: fortran
@@ -209,26 +209,26 @@ soon as some piece of data has finished processing it will be written to the
 file.  This enables one to process arbitrarily large files on personal
 computers and laptops.
 
-Converting Data to SDF
-^^^^^^^^^^^^^^^^^^^^^^
+Converting Data to ASDF
+^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
     The use of ObsPy means that we get a converter for effectively all seismic
     waveform data formats for free.
 
 
-This section demonstrates the creation of a new SDF file from existing data.
+This section demonstrates the creation of a new ASDF file from existing data.
 The first step is to initialize a new data set object with a filename. If the
 file does not yet exist, it will be created, otherwise it will be read and
 appended if necessary.
 
 .. code-block:: python
 
-    from sdf_data_set import SDFDataSet
+    from obspy_asdf import ASDFDataSet
 
     # If the file does not exist, it will be created,
     # otherwise the old one will used.
-    data_set = SDFDataSet("test_file.h5")
+    data_set = ASDFDataSet("test_file.h5")
 
 One can add waveform and station data in any order. The class will take care
 that everything is mapped to the correct groups in the HDF5 file.
@@ -257,14 +257,14 @@ This interactive session demonstrates how to use the class to access the data.
 
 .. code-block:: python
 
-    >>> data_set = SDFDataSet("test_file.h5")
+    >>> data_set = ASDFDataSet("test_file.h5")
 
 One can print some information.
 
 .. code-block:: python
 
     >>> print data_set
-    SDF file: 'test_file.h5' (2.7 GB)
+    ASDF file: 'test_file.h5' (2.7 GB)
         Contains data from 1392 stations.
 
 And one can access waveforms and station. Tab completion works just fine. What

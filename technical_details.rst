@@ -4,7 +4,7 @@ Technical Details
 Internal Data Layout
 --------------------
 
-SDF supports two fundamentally different layouts: one for data in the classical
+ASDF supports two fundamentally different layouts: one for data in the classical
 SEED structure sorted by network, station, location, and channel, and a second
 one for active source seismic data common in the industry. The demands of both
 types of data are too distinct to allow for storage under one common structure.
@@ -24,7 +24,7 @@ identification of non-seismometer measurements like GPS or pressure data (we
 should investigate if the GPS people actually use SEED, I know the SCEC serves
 them as SAC and the actual raw GPS measurements are their own formats, but the
 actual displacement could just as well be stored in a SEED file - then it would
-also be suitable for SDF).
+also be suitable for ASDF).
 
 The actual structure is defined as follows
 
@@ -64,7 +64,7 @@ format to describe all receivers of a single station.
 
 Each station folder contains an arbitrary list of continuous waveform traces
 identifiable via the locations and channel attributes and the start- and
-endtime. SDF defines a continuous trace as a single chunk of data without any
+endtime. ASDF defines a continuous trace as a single chunk of data without any
 gaps or overlaps. This implies that the time of the first sample and the sample
 spacing are enough to uniquely determine the time of every sample.
 
@@ -76,7 +76,7 @@ This simple diagrams aims to illustrate the main structure. Arrows denote links
 either via ids or "symlinks". The diagram denotes the contents of the
 container.
 
-.. image:: https://raw.github.com/wiki/krischer/sdf/images/sdf.png
+.. image:: https://raw.github.com/wiki/krischer/asdf/images/sdf.png
     :width: 100%
     :align: center
 
@@ -115,10 +115,10 @@ coexist in the same file in peace.
 The Time Datatype
 ^^^^^^^^^^^^^^^^^
 
-The only slightly more complex data type in SDF is the time data type.
+The only slightly more complex data type in ASDF is the time data type.
 Experience has shown that the available time resolution in preexisting data
 formats is not fine enough for some applications like megahertz vibration
-experiments. Although the aim of the SDF format is to be as simplistic as
+experiments. Although the aim of the ASDF format is to be as simplistic as
 possible this slight complication is justified in the authors eyes making the
 file format suitable for a whole new range of applications.
 
@@ -134,7 +134,7 @@ giving a timing accuracy of 10^(-19) seconds.
 Data Streaming
 ^^^^^^^^^^^^^^
 
-SDF is well suited for the distribution and exchange of very large waveform
+ASDF is well suited for the distribution and exchange of very large waveform
 data sets. In order for data centers being able to support this pattern in a
 reasonable manner the format needs to be streamable meaning it has to be
 possible to create parts of the file, send them and in the meantime create the
@@ -161,7 +161,7 @@ ways to deal with them where applicable.
 Irregularly sampled data
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The SDF format in the initial definition can not deal with this and neither can
+The ASDF format in the initial definition can not deal with this and neither can
 most signal processing tools in use in seismology. If this ever become a
 serious issue, the format definition will have to be extended. One possibility
 would be to use 2D arrays for irregularly sampled components; one dimension

@@ -181,7 +181,7 @@ format does this is illustrated below:
   captured by the core processing elements set is acknowledged with the ability
   to create new processing elements. Furthermore a free-form processing element
   will be supplied able to contain arbitrary information. See
-  `Provenance <https://github.com/krischer/SDF/wiki/Provenance-Definition>`_
+  `Provenance <https://github.com/krischer/ASDF/wiki/Provenance-Definition>`_
   for more information.
 
 Diagram
@@ -191,7 +191,7 @@ This simple diagrams aims to illustrate the main structure. Arrows denote links
 either via ids or "symlinks". The diagram denotes the contents of the
 container.
 
-.. image:: https://raw.github.com/wiki/krischer/sdf/images/sdf.png
+.. image:: https://raw.github.com/wiki/krischer/asdf/images/sdf.png
     :width: 100%
     :align: center
 

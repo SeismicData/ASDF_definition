@@ -1,5 +1,5 @@
 NS_PREFIX = "seis_prov"
-NS_SEIS = (NS_PREFIX, "http://sdf.readthedocs.org/seis_prov/0.0/#")
+NS_SEIS = (NS_PREFIX, "http://asdf.readthedocs.org/seis_prov/0.0/#")
 
 from datetime import datetime
 import glob

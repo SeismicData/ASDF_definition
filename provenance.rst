@@ -102,7 +102,7 @@ prefix **seis_prov** to refer to it.
 .. note::
 
     * **prefix:** ``seis_prov``
-    * **namespace:** ``http://sdf.readthedocs.org/seis_prov/0.0/#``
+    * **namespace:** ``http://asdf.readthedocs.org/seis_prov/0.0/#``
 
     The current version is **0.0** and is not stable!
 

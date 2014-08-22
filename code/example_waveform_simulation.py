@@ -1,16 +1,22 @@
-me = pr.person("seis_prov:pp_me", other_attributes=(
+me = pr.agent("seis_prov:pp_me", other_attributes=(
+    ("prov:type",
+        prov.identifier.QualifiedName(prov.constants.PROV, "Person")),
     ("prov:label", "Hans Mustermann"),
     ("seis_prov:name", "Hans Mustermann"),
     ("seis_prov:email", "hans.mustermann@email.com")
 ))
 
-other = pr.person("seis_prov:pp_other", other_attributes=(
+other = pr.agent("seis_prov:pp_other", other_attributes=(
+    ("prov:type",
+        prov.identifier.QualifiedName(prov.constants.PROV, "Person")),
     ("prov:label", "Susanna Musterfrau"),
     ("seis_prov:name", "Susanna Musterfrau"),
     ("seis_prov:email", "susanna.musterfrau@email.com")
 ))
 
-specfem = pr.software_agent("seis_prov:sa_9DIG8A-TA", other_attributes=(
+specfem = pr.agent("seis_prov:sa_9DIG8A-TA", other_attributes=(
+    ("prov:type",
+        prov.identifier.QualifiedName(prov.constants.PROV, "SoftwareAgent")),
     ("prov:label", "SPECFEM3D GLOBE"),
     ("seis_prov:software_name", "SPECFEM3D GLOBE"),
     ("seis_prov:software_version", "6.0.0"),
