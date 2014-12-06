@@ -18,7 +18,7 @@ trace_1 = pr.entity("seis_prov:wf_A34J4DIDJ3", other_attributes=(
      prov.model.Literal(6000, prov.constants.XSD_INT)),
     ("seis_prov:sampling_rate",
      prov.model.Literal(100.0, prov.constants.XSD_DOUBLE)),
-    ("seis_prov:unit", "m/s")
+    ("seis_prov:units", "m/s")
     )
 )
 
@@ -33,7 +33,7 @@ trace_2 = pr.entity("seis_prov:wf_0034AIDDJ8", other_attributes=(
      prov.model.Literal(6000, prov.constants.XSD_INT)),
     ("seis_prov:sampling_rate",
      prov.model.Literal(100.0, prov.constants.XSD_DOUBLE)),
-    ("seis_prov:unit", "m/s")
+    ("seis_prov:units", "m/s")
     )
 )
 

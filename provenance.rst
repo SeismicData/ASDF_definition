@@ -327,7 +327,7 @@ Recommended ``prov:label``   ``Waveform Trace``
 ``seis_prov:sampling_rate`` *xsd:double*
     The sampling rate of the data.
 
-``seis_prov:unit`` *xsd:string*
+``seis_prov:units`` *xsd:string*
     Units of the waveform data as a common abbreviation, e.g. ``m``, ``m/s``,
     ``nm/s^2``, ...
 
@@ -467,7 +467,7 @@ Recommended ``prov:label``   ``Adjoint Source``
 ``seis_prov:sampling_rate`` *xsd:double*
     The sampling rate of the data.
 
-``seis_prov:unit`` *xsd:string*
+``seis_prov:units`` *xsd:string*
     Units of the adjoint source as a common abbreviation, e.g. ``m``, ``m/s``,
     ``nm/s^2``, ...
 
