@@ -52,7 +52,7 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 
 # The encoding of source files.
-#source_encoding = 'utf-8-sig'
+# source_encoding = 'utf-8-sig'
 
 # The master toctree document.
 master_doc = 'index'
@@ -246,7 +246,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'sdf', u'ASDF Documentation',
+    ('index', 'asdf', u'ASDF Documentation',
      [u'Lion Krischer, James Smith, Jeroen Tromp'], 1)
 ]
 

@@ -226,7 +226,7 @@ of people or an institution.
 *SEIS PROV* does not define any new agent types - the ones defined in W3C PROV
 are sufficient. *SEIS PROV* requires each software agent to have
 ``seis_prov:software_name``, ``seis_prov:sofware_version``, and
-``seis_prov:url`` attributes. A human readable ``prov:label`` is recommended.
+``seis_prov:website`` attributes. A human readable ``prov:label`` is recommended.
 
 The following example PROV XML serialization is the same as in the box above.
 
@@ -1308,4 +1308,12 @@ dynamically. No need to incorporate an actual XML library.
 .. graphviz:: code/dot/example_waveform_simulation.dot
 
 .. literalinclude:: code/xml/example_waveform_simulation.xml
+    :language: xml
+
+Cross Correlation
+^^^^^^^^^^^^^^^^^
+
+.. graphviz:: code/dot/example_cross_correlation.dot
+
+.. literalinclude:: code/xml/example_cross_correlation.xml
     :language: xml

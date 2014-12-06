@@ -1,13 +1,10 @@
-.. ASDF documentation master file, created by
-   sphinx-quickstart on Sat Feb 15 23:24:05 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 An Adaptable and Modern Seismic Data Format
 ===========================================
 
 This document presents the current status of an attempt to develop and define a
-new data format for modern seismology. It is currently divided into five parts:
+new data format for modern seismology dubbed **ASDF** (**A**\ daptable **S**\
+eismic **D**\ ata **F**\ ormat). It is divided into five parts:
+
 
 1. The introduction demonstrates the necessity of a new format and gives a
    high-level overview of the format and the ideas behind it.

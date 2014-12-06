@@ -20,14 +20,14 @@ specfem = pr.agent("seis_prov:sa_9DIG8A-TA", other_attributes=(
     ("prov:label", "SPECFEM3D GLOBE"),
     ("seis_prov:software_name", "SPECFEM3D GLOBE"),
     ("seis_prov:software_version", "6.0.0"),
-    ("seis_prov:url", "http://geodynamics.org/cig/software/specfem3d")
+    ("seis_prov:website", "http://geodynamics.org/cig/software/specfem3d")
 ))
 
 model = pr.entity("seis_prov:em_SKFUSJDOEJ", other_attributes=(
     ("prov:label", "Earth Model"),
     ("prov:type", "seis_prov:earth_model"),
     ("seis_prov:model_name", "Random Model"),
-    ("seis_prov:url", "http://random.org/model")
+    ("seis_prov:website", "http://random.org/model")
 ))
 
 
@@ -35,7 +35,7 @@ param = pr.entity("seis_prov:ip_38JD89DA8L", other_attributes=(
     ("prov:label", "Input Parameter"),
     ("prov:type", "seis_prov:input_parameter"),
     ("seis_prov:model_name", "Random Model"),
-    ("seis_prov:url", "http://random.org/model"),
+    ("seis_prov:website", "http://random.org/model"),
     ("seis_prov:SIMULATION_TYPE", 1),
     ("seis_prov:NOISE_TOMOGRAPHY", 0),
     ("seis_prov:NCHUNKS", 1),

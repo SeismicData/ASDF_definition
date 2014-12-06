@@ -4,7 +4,7 @@ obspy = pr.agent("seis_prov:sa_9DIG8A-TA", other_attributes=(
     ("prov:label", "ObsPy"),
     ("seis_prov:software_name", "ObsPy"),
     ("seis_prov:software_version", "0.9.2"),
-    ("seis_prov:url", "http://www.obspy.org"))
+    ("seis_prov:website", "http://www.obspy.org"))
 )
 
 trace_1 = pr.entity("seis_prov:wf_A34J4DIDJ3", other_attributes=(
