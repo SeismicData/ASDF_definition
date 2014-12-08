@@ -39,12 +39,13 @@ The other part means reading two file, one containing data, the other
 synthetics, find suitable windows, make misfit measurements and design adjoint
 sources.
 
-Ambient Noise Data
-^^^^^^^^^^^^^^^^^^
+Adjoint Sources
+^^^^^^^^^^^^^^^
 
 ...
 
-Exploration Data
-^^^^^^^^^^^^^^^^
+
+Ambient Noise Cross Correlations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ...
