@@ -1,13 +1,6 @@
 Technical Details
 =================
 
-Internal Data Layout
---------------------
-
-ASDF supports two fundamentally different layouts: one for data in the classical
-SEED structure sorted by network, station, location, and channel, and a second
-one for active source seismic data common in the industry. The demands of both
-types of data are too distinct to allow for storage under one common structure.
 
 SEED structure layout
 ---------------------
