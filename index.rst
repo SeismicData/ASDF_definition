@@ -1,32 +1,46 @@
-An Adaptable and Modern Seismic Data Format
-===========================================
+ASDF
+====
 
-This document presents the current status of an attempt to develop and define a
-new data format for modern seismology dubbed **ASDF** (**A**\ daptable **S**\
-eismic **D**\ ata **F**\ ormat). It is divided into five parts:
+.. image:: images/asdf_logo.*
+    :width: 80%
+    :align: center
 
 
-1. The introduction demonstrates the necessity of a new format and gives a
-   high-level overview of the format and the ideas behind it.
+This is the formal definition of the *Adaptable Seismic Data Format*
+(**ASDF**).
 
-2. The next section deals with the technical details and is still very much
-   subject to even fundamental changes.
 
-3. The third part present two implementations of the format. One based on ADIOS
-   and Fortran and the other implemented in Python with the help of the ObsPy
-   framework and the HDF5 container format.
+.. note::
 
-4. This section displays some use cases to demonstrate the wide range of
-   possible uses.
+    This document is for version |BOLDVERSION| of the format.
 
-5. The last part tries to define a new XML format for seismological provenance
-   information dubbed *SEIS PROV*.
+
+For further information and contact information please see these two web sites:
+
+* Landing page of the ASDF data format: http://seismic-data.org
+* Github repository of this document http://www.github.com/SeismicData/ASDF_definition
+
+
+Additionally these pages and software projects are of further interest:
+
+* C/Fortran implementation intended to be integrated into numerical solvers: https://github.com/SeismicData/asdf-library
+* Python implementation: http://seismicdata.github.io/pyasdf/
+* ASDF validation tool: https://github.com/SeismicData/asdf_validate
+* Graphical user interface for ASDF: https://github.com/SeismicData/asdf_sextant
+* SEIS-PROV: http://seismicdata.github.io/SEIS-PROV/
+
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
 
+
    introduction
-   technical_details
-   implementations
-   use_cases
+   big_picture
+   container
+   header
+   events
+   waveforms
+   auxiliary_data
    provenance
+   potential_shortcomings

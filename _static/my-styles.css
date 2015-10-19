@@ -1,0 +1,11 @@
+/* Some padding on the logo in the side bar */
+.logo {
+    width: 85% !important;
+    padding-top: 25px !important;
+}
+
+
+/* Padding of the logo on the index page */
+.align-center > img {
+    padding: 40px
+}

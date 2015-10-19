@@ -1,0 +1,364 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Waveform Data &mdash; ASDF 0.0.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="stylesheet" href="_static/my-styles.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  
+    <link rel="top" title="ASDF 0.0.2 documentation" href="index.html"/>
+        <link rel="next" title="Auxiliary Data" href="auxiliary_data.html"/>
+        <link rel="prev" title="Events" href="events.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ASDF
+          
+
+          
+            
+            <img src="_static/asdf_logo.svg" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="big_picture.html">Big Picture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="container.html">The Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header.html">Header</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">Events</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Waveform Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#seed-structure-layout">SEED structure layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#naming-details">Naming Details</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auxiliary_data.html">Auxiliary Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provenance.html">Provenance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="potential_shortcomings.html">Potential Shortcomings</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">ASDF</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Waveform Data</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/waveforms.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="waveform-data">
+<h1>Waveform Data<a class="headerlink" href="#waveform-data" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><strong>&#8220;Waveforms&#8221;</strong> - The waveform data will reside in the <em>Waveforms</em> folder
+further sorted per stations. This per-station sorting allows a natural use of
+the StationXML format to describe all receivers of a single station. Each
+station folder contains an arbitrary list of continuous waveform traces
+identifiable via the locations and channel attributes and the start- and
+endtime. A waveform is defined as a continuous trace without any gaps or
+overlaps. This implies that the time of the first sample and the sample
+spacing are enough to uniquely determine the time of every sample. The start-
+and endtimes for the folder name of the traces are to be specified as UTC
+times as <a class="reference external" href="http://www.w3.org/TR/NOTE-datetime">ISO 8601</a> datetime strings with
+4 digit year representations. Most programming languages have built-in
+parsing routines for these strings. Note that the times here are just used
+for a quick overview and sorting purposes. The high-precision time stored as
+an attribute to the data array is the actually valid time.</li>
+</ul>
+<p>p
+* <strong>NET, STA, LOC, CHAN</strong> are placeholders for the network, station, location,</p>
+<blockquote>
+<div>and channel codes as defined in the
+<a class="reference external" href="http://www.fdsn.org/seed_manual/SEEDManual_V2.4.pdf">SEED Manual</a>. They
+therefore follow the same limitations regarding the allowed characters
+(alphanumeric ASCII strings) and the length (network: 2, station: 5,
+location: 2, channel: 3). The <cite>_TAG</cite> part of the name is used to
+differentiate traces with exactly the same channel and duration, e.g.
+multiple synthetics from different
+simulations.</div></blockquote>
+<ul class="simple">
+<li><strong>&#8220;StationXML&#8221;</strong> - The <a class="reference external" href="http://www.fdsn.org/xml/station/">FDSN StationXML</a>
+format describes the recording instrument for each piece of waveform data. An
+advantage of this format is its flexibility, meaning the instrument response
+can be stored for the observed waveform but not for the synthetic waveform.
+It also allows for non-seismic data, such as GPS and pressure data, to be
+included. An sample StationXML for station AFI can be viewed
+<a class="reference external" href="http://service.iris.edu/fdsnws/station/1/query?net=IU&amp;sta=AFI&amp;loc=00&amp;cha=LH?,BH*&amp;starttime=2011-06-07T01:00:00&amp;endtime=2011-06-07T07:00:00&amp;level=station&amp;format=xml&amp;nodata=404">here</a>.</li>
+</ul>
+<div class="section" id="seed-structure-layout">
+<h2>SEED structure layout<a class="headerlink" href="#seed-structure-layout" title="Permalink to this headline">¶</a></h2>
+<p>In this case the data is organized per station, each of which will have its own
+folder. The metainformation for each station and receivers therein is described
+in a StationXML file in the folder.</p>
+<p>Metadata is available in one of the following forms.</p>
+<p>Using the proven SEED channel ids and corresponding StationXML files for
+example enables the storage of arbitrarily oriented components and the
+identification of non-seismometer measurements like GPS or pressure data (we
+should investigate if the GPS people actually use SEED, I know the SCEC serves
+them as SAC and the actual raw GPS measurements are their own formats, but the
+actual displacement could just as well be stored in a SEED file - then it would
+also be suitable for ASDF).</p>
+<p>The actual structure is defined as follows</p>
+<div class="highlight-xml"><div class="highlight"><pre>- QuakeML (optional)
+- Waveforms/
+    |- NET.STA/
+    |   |- StationXML (optional but recommended)
+    |   |- NET.STA.LOC.CHAN_STARTTIME_ENDTIME[_TAG]/
+    |   |    |- Provenance (optional, can be a reference)
+    |   |    |- EventID (optional)
+    |   |    |- OriginID (optional)
+    |   |    |- MagnitudeID (optional)
+    |   |    |- FocalMechanismID (optional)
+    |   |    |- Data (Array)
+    |   |    |   |- Starttime (Attribute)
+    |   |    |   |- Sample Spacing (Attribute)
+    |   |- NET.STA.LOC.CHAN_STARTTIME_ENDTIME[_TAG]/
+    |   |    |- Provenance (optional, can be a reference)
+    |   |    |- EventID (optional)
+    |   |    |- OriginID (optional)
+    |   |    |- MagnitudeID (optional)
+    |   |    |- FocalMechanismID (optional)
+    |   |    |- Data (Array)
+    |   |    |   |- Starttime (Attribute)
+    |   |    |   |- Sample Spacing (Attribute)
+    |   |- ...
+    |- ...
+- Provenances/ (optional)
+    |- ...
+</pre></div>
+</div>
+<p>The actual waveform data will reside in the <em>Waveforms</em> folder further sorted
+per stations. This per-station sorting allows a natural use of the StationXML
+format to describe all receivers of a single station.</p>
+<p>Each station folder contains an arbitrary list of continuous waveform traces
+identifiable via the locations and channel attributes and the start- and
+endtime. ASDF defines a continuous trace as a single chunk of data without any
+gaps or overlaps. This implies that the time of the first sample and the sample
+spacing are enough to uniquely determine the time of every sample.</p>
+<a class="reference internal image-reference" href="_images/contents.png"><img alt="_images/contents.png" class="align-center" src="_images/contents.png" style="width: 100%;" /></a>
+<p>The container layout is meant to be adaptable to seismic data used in multiple
+applications. To get a better idea of what this means, let&#8217;s consider two
+different applications of the seismic data.</p>
+<p>The first example is from earthquake seismology. Since workflows in earthquake
+seismology generally work on more than one waveform per event, it makes sense
+to keep all waveforms associated with a single event together. The way the
+format does this is illustrated below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span> <span class="n">Source</span> <span class="p">(</span><span class="n">Optional</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Waveforms</span><span class="o">/</span>
+    <span class="o">|-</span> <span class="n">NET</span><span class="o">.</span><span class="n">STA</span><span class="o">/</span>
+    <span class="o">|</span>   <span class="o">|-</span> <span class="n">StationXML</span> <span class="p">(</span><span class="n">optional</span> <span class="n">but</span> <span class="n">recommended</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|-</span> <span class="n">NET</span><span class="o">.</span><span class="n">STA</span><span class="o">.</span><span class="n">LOC</span><span class="o">.</span><span class="n">CHAN_STARTTIME_ENDTIME</span><span class="p">[</span><span class="n">_TAG</span><span class="p">]</span><span class="o">/</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">Provenance</span> <span class="p">(</span><span class="n">optional</span><span class="p">,</span> <span class="n">can</span> <span class="n">be</span> <span class="n">a</span> <span class="n">reference</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">EventID</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">OriginID</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">MagnitudeID</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">FocalMechanismID</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">Data</span> <span class="p">(</span><span class="n">Array</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|</span>   <span class="o">|-</span> <span class="n">Starttime</span> <span class="p">(</span><span class="n">Attribute</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|</span>   <span class="o">|-</span> <span class="n">Sample</span> <span class="n">Spacing</span> <span class="p">(</span><span class="n">Attribute</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|-</span> <span class="n">NET</span><span class="o">.</span><span class="n">STA</span><span class="o">.</span><span class="n">LOC</span><span class="o">.</span><span class="n">CHAN_STARTTIME_ENDTIME</span><span class="p">[</span><span class="n">_TAG</span><span class="p">]</span><span class="o">/</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">Provenance</span> <span class="p">(</span><span class="n">optional</span><span class="p">,</span> <span class="n">can</span> <span class="n">be</span> <span class="n">a</span> <span class="n">reference</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">EventID</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">OriginID</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">MagnitudeID</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">FocalMechanismID</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|-</span> <span class="n">Data</span> <span class="p">(</span><span class="n">Array</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|</span>   <span class="o">|-</span> <span class="n">Starttime</span> <span class="p">(</span><span class="n">Attribute</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|</span>    <span class="o">|</span>   <span class="o">|-</span> <span class="n">Sample</span> <span class="n">Spacing</span> <span class="p">(</span><span class="n">Attribute</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">|-</span> <span class="o">...</span>
+    <span class="o">|-</span> <span class="o">...</span>
+<span class="o">-</span> <span class="n">Provenances</span><span class="o">/</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+    <span class="o">|-</span> <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="naming-details">
+<h2>Naming Details<a class="headerlink" href="#naming-details" title="Permalink to this headline">¶</a></h2>
+<p><strong>NET, STA, LOC, CHAN</strong> are placeholders for the network, station, location,
+and channel codes as defined in the [SEED
+Manual](<a class="reference external" href="http://www.fdsn.org/seed_manual/SEEDManual_V2.4.pdf">http://www.fdsn.org/seed_manual/SEEDManual_V2.4.pdf</a>). They therefore
+follow the same limitations regarding the allowed characters (alphanumeric
+ASCII strings) and the length (network: 2, station: 5, location: 2, channel:
+3).</p>
+<p>The start- and endtimes for the folder name of the traces are to be specified
+as UTC times as [ISO 8601](<a class="reference external" href="http://www.w3.org/TR/NOTE-datetime">http://www.w3.org/TR/NOTE-datetime</a>) datetime strings
+with 4 digit year representations. Most programming languages have built-in
+parsing routines for these strings. Note that the times here are just used for
+a quick overview and sorting purposes. The high-precision time stored as an
+attribute to the data array is the actually valid time.</p>
+<p>The <cite>_TAG</cite> part of the name is used to differentiate traces with exactly the
+same channel and duration, e.g. multiple synthetics from different simulations.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auxiliary_data.html" class="btn btn-neutral float-right" title="Auxiliary Data" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="events.html" class="btn btn-neutral" title="Events" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014-2015, Lion Krischer, James Smith, Jeroen Tromp.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
