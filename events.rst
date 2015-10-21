@@ -10,11 +10,23 @@ It is recommended to always use the most wide-spread QuakeML version but ASDF
 will work fine as long as the QuakeML version has the concept of resource
 identifiers and public IDs.
 
-**Details:**
 
-.. code::
 
-    DATASET "QuakeML" {
-        DATATYPE  H5T_STD_I8LE
-        DATASPACE  SIMPLE { ( * ) / ( H5S_UNLIMITED ) }
-    }
++----------------+-------------------------------------------------------------+
+| ``/QuakeML`` Data Set                                                        |
++================+=============================================================+
+| **Type**       | Data Set                                                    |
++----------------+-------------------------------------------------------------+
+| **Path**       | ``/QuakeML``                                                |
++----------------+-------------------------------------------------------------+
+| **Description**| Event information as a single QuakeML file.                 |
++----------------+-------------------------------------------------------------+
+| **Required**   | False                                                       |
++----------------+-------------------------------------------------------------+
+| **Details**    |  .. code::                                                  |
+|                |                                                             |
+|                |      DATASET "QuakeML" {                                    |
+|                |          DATATYPE  H5T_STD_I8LE                             |
+|                |          DATASPACE  SIMPLE { ( * ) / ( H5S_UNLIMITED ) }    |
+|                |      }                                                      |
++----------------+-------------------------------------------------------------+

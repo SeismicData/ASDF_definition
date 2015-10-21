@@ -10,5 +10,5 @@ shown promise for dealing with large datasets in other applications.
 ASDF delegates the allowed compression, chunking, checksumming, etc. settings
 to the HDF5 definition. Best to not use use custom filters that are not
 shipping with the HDF5 library as it will severely hurt exchangeability and
-possibly future safety. The HDF5 group put a lot of emphasis on backwards
+possibly future safety. The HDF5 group puts a lot of emphasis on backwards
 compatibility.

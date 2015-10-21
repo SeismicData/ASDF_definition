@@ -9,3 +9,24 @@
 .align-center > img {
     padding: 40px
 }
+
+
+/* Overwrite the responsive tables to wrap the lines a bit. */
+.wy-table-responsive {
+    margin-bottom: 24px;
+    max-width: 100%;
+    overflow: visible;
+}
+.wy-table-responsive table {
+    margin-bottom: 0 !important
+}
+.wy-table-responsive table td,
+.wy-table-responsive table th {
+    white-space: normal;
+}
+
+/* Full width tables with a bit of a margin; looks much better. */
+table {
+    width: 100%;
+    margin-top: 10px;
+}

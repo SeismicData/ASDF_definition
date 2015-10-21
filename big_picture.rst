@@ -2,7 +2,8 @@ Big Picture
 ===========
 
 ASDF stores everything in an HDF5 file with a layout that is illustrated by the
-following picture. It contains four parts:
+following picture. It contains four parts, all of which are elaborated upon in
+a another section:
 
 1. Earthquake information (yellow) is stored in the form of a single QuakeML
    file. It can store an arbitrary number of seismic events of various types.

@@ -1,60 +1,75 @@
 Header
 ======
 
-This is the root element (``/``) of an HDF5 file satisfying the ASDF
-definition.
+This section defines all elements that the root group (``/``) of a proper ASDF
+file should contain.
 
 Attributes
 ----------
 
-``file_format``
-^^^^^^^^^^^^^^^
+The root group contains two attributes that serve to mark the format and the
+version of the format for a particular file.
 
-**Description:** The file format version.
++----------------+-------------------------------------------------------------+
+| ``file_format`` Attribute                                                    |
++================+=============================================================+
+| **Type**       | Attribute                                                   |
++----------------+-------------------------------------------------------------+
+| **Name**       | ``file_format``                                             |
++----------------+-------------------------------------------------------------+
+| **Description**| The file format name                                        |
++----------------+-------------------------------------------------------------+
+| **Required**   | True                                                        |
++----------------+-------------------------------------------------------------+
+| **Value**      | ``"ASDF"``                                                  |
++----------------+-------------------------------------------------------------+
+| **Details**    |  .. code::                                                  |
+|                |                                                             |
+|                |      ATTRIBUTE "file_format" {                              |
+|                |          DATATYPE  H5T_STRING {                             |
+|                |              STRPAD H5T_STR_NULLPAD;                        |
+|                |              CSET H5T_CSET_ASCII;                           |
+|                |              CTYPE H5T_C_S1;                                |
+|                |          }                                                  |
+|                |          DATASPACE  SCALAR;                                 |
+|                |      }                                                      |
++----------------+-------------------------------------------------------------+
 
-**Value:** |CODEVERSION|
 
-**Details:**
++----------------+-------------------------------------------------------------+
+| ``file_format_version`` Attribute                                            |
++================+=============================================================+
+| **Type**       | Attribute                                                   |
++----------------+-------------------------------------------------------------+
+| **Name**       | ``file_format_version``                                     |
++----------------+-------------------------------------------------------------+
+| **Description**| The file format version.                                    |
++----------------+-------------------------------------------------------------+
+| **Required**   | True                                                        |
++----------------+-------------------------------------------------------------+
+| **Value**      | |CODEVERSION|                                               |
++----------------+-------------------------------------------------------------+
+| **Details**    |  .. code::                                                  |
+|                |                                                             |
+|                |      ATTRIBUTE "file_format_version" {                      |
+|                |          DATATYPE  H5T_STRING {                             |
+|                |              STRPAD H5T_STR_NULLPAD;                        |
+|                |              CSET H5T_CSET_ASCII;                           |
+|                |              CTYPE H5T_C_S1;                                |
+|                |          }                                                  |
+|                |          DATASPACE  SCALAR;                                 |
+|                |      }                                                      |
++----------------+-------------------------------------------------------------+
 
-.. code::
-
-    ATTRIBUTE "file_format" {
-        DATATYPE  H5T_STRING {
-            STRPAD H5T_STR_NULLPAD;
-            CSET H5T_CSET_ASCII;
-            CTYPE H5T_C_S1;
-        }
-        DATASPACE  SCALAR;
-    }
-
-``file_format_version``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-**Description:** The file format name.
-
-**Value:** ``"ASDF"``
-
-**Details:**
-
-.. code::
-
-    ATTRIBUTE "file_format_version" {
-        DATATYPE  H5T_STRING {
-            STRPAD H5T_STR_NULLPAD;
-            CSET H5T_CSET_ASCII;
-            CTYPE H5T_C_S1;
-        }
-        DATASPACE  SCALAR;
-    }
 
 
 Data Sets
 ---------
 
-It potentially contains a single data set.
+It can optionally contain a data set representing a QuakeML file.
 
-``QuakeML``
-^^^^^^^^^^^
+Data Set - ``/QuakeML``
+^^^^^^^^^^^^^^^^^^^^^^^
 
 See :doc:`events` for further information
 
@@ -62,23 +77,23 @@ See :doc:`events` for further information
 Groups
 ------
 
-Additionally it can contain the following groups. ASDF files do not need to
-contain all three.
+
+Waveform, auxiliary, and provenance data is stored into three sub groups.
 
 
-``Waveforms``
-^^^^^^^^^^^^^^
+Group - ``/Waveforms``
+^^^^^^^^^^^^^^^^^^^^^^
 
 See :doc:`waveforms` for further information.
 
 
-``AuxiliaryData``
-^^^^^^^^^^^^^^^^^
+Group - ``/AuxiliaryData``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 See :doc:`auxiliary_data` for further information.
 
 
-``Provenance``
-^^^^^^^^^^^^^^
+Group - ``/Provenance``
+^^^^^^^^^^^^^^^^^^^^^^^
 
 See :doc:`provenance` for further information.
