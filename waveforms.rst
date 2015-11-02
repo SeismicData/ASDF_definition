@@ -207,8 +207,8 @@ time of the first sample and the sampling interval.
 +----------------+-------------------------------------------------------------+
 
 Provenance for that trace can be stored as an identifier to a certain
-provenance record which represents that particular trace in time. It is
-possible (and recommended) but not necessary that a provenance document in the
+provenance record which represents that particular trace. It is possible (and
+recommended) but not necessary that a provenance document in the
 :doc:`provenance` contains a record with that id.
 
 
