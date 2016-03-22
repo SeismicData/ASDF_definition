@@ -249,7 +249,8 @@ interest for synthetic data where these three are exactly known.
 +----------------+-------------------------------------------------------------+
 | **Name**       | ``event_id``                                                |
 +----------------+-------------------------------------------------------------+
-| **Description**| The id of the event associated with that waveform.          |
+| **Description**| The id of the event associated with that waveform. Can      |
+|                | contain several comma-separated ids.                        |
 +----------------+-------------------------------------------------------------+
 | **Required**   | False                                                       |
 +----------------+-------------------------------------------------------------+
@@ -272,7 +273,8 @@ interest for synthetic data where these three are exactly known.
 +----------------+-------------------------------------------------------------+
 | **Name**       | ``origin_id``                                               |
 +----------------+-------------------------------------------------------------+
-| **Description**| The id of the origin associated with that waveform.         |
+| **Description**| The id of the orgin associated with that waveform. Can      |
+|                | contain several comma-separated ids.                        |
 +----------------+-------------------------------------------------------------+
 | **Required**   | False                                                       |
 +----------------+-------------------------------------------------------------+
@@ -295,7 +297,8 @@ interest for synthetic data where these three are exactly known.
 +----------------+-------------------------------------------------------------+
 | **Name**       | ``magnitude_id``                                            |
 +----------------+-------------------------------------------------------------+
-| **Description**| The id of the magnitude associated with that waveform.      |
+| **Description**| The id of the magnitude associated with that waveform. Can  |
+|                | contain several comma-separated ids.                        |
 +----------------+-------------------------------------------------------------+
 | **Required**   | False                                                       |
 +----------------+-------------------------------------------------------------+
@@ -318,7 +321,8 @@ interest for synthetic data where these three are exactly known.
 +----------------+-------------------------------------------------------------+
 | **Name**       | ``focal_mechanism_id``                                      |
 +----------------+-------------------------------------------------------------+
-| **Description**| The id of the focal_mechanism associated with that waveform.|
+| **Description**| The id of the focal mechanism associated with that waveform.|
+|                | Can contain several comma-separated ids.                    |
 +----------------+-------------------------------------------------------------+
 | **Required**   | False                                                       |
 +----------------+-------------------------------------------------------------+
