@@ -39,8 +39,10 @@ pattern in the following table.
 +----------------+-------------------------------------------------------------+
 | **Details**    |  .. code::                                                  |
 |                |                                                             |
-|                |      DATASET "373da5fe_d424_4f44_9bca_4334d77ed10b" {       |
+|                |      DATASET "373fe_9bca_43ed10b" {                         |
 |                |          DATATYPE  H5T_STD_I8LE                             |
-|                |          DATASPACE  SIMPLE { ( * ) / ( H5S_UNLIMITED ) }    |
+|                |          DATASPACE  SIMPLE {                                |
+|                |              ( * ) / ( H5S_UNLIMITED )                      |
+|                |          }                                                  |
 |                |      }                                                      |
 +----------------+-------------------------------------------------------------+

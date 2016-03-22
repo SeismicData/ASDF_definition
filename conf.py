@@ -55,8 +55,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ASDF'
-copyright = u'2014-2015, Lion Krischer, James Smith, Jeroen Tromp'
+project = u'ASDF Definition'
+copyright = u'2014-2016, Lion Krischer, James Smith, Jeroen Tromp'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -217,13 +217,15 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     #'preamble': '',
+    'classoptions': ',oneside',
+    'babel': '\\usepackage[english]{babel}'
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'ASDF.tex', u'ASDF Documentation',
+  ('index', 'ASDF_Definition.tex', u'ASDF Definition',
    u'Lion Krischer, James Smith, Jeroen Tromp', 'manual'),
 ]
 
@@ -253,7 +255,7 @@ latex_logo = "images/asdf_logo.pdf"
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'asdf', u'ASDF Documentation',
+    ('index', 'asdf', u'ASDF Definition',
      [u'Lion Krischer, James Smith, Jeroen Tromp'], 1)
 ]
 
@@ -267,8 +269,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'ASDF', u'ASDF Documentation',
-   u'Lion Krischer, James Smith, Jeroen Tromp', 'ASDF', 'One line description of project.',
+  ('index', 'ASDF', u'ASDF Definition',
+   u'Lion Krischer, James Smith, Jeroen Tromp', 'ASDF', 'The Adaptable Seismic Data Format.',
    'Miscellaneous'),
 ]
 

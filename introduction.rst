@@ -1,8 +1,9 @@
 Introduction
 ============
 
-The submitted a paper containing a large section about the motivation for this
-new format and why we think we really need this.
+We submitted a paper containing a large section about the motivation for this
+new format and why we think we really need this. Once published we will put a
+link to it here.
 
 Why introduce a new seismic data format?
 ----------------------------------------

@@ -29,6 +29,8 @@ identifiers and public IDs.
 |                |                                                             |
 |                |      DATASET "QuakeML" {                                    |
 |                |          DATATYPE  H5T_STD_I8LE                             |
-|                |          DATASPACE  SIMPLE { ( * ) / ( H5S_UNLIMITED ) }    |
+|                |          DATASPACE  SIMPLE {                                |
+|                |            ( * ) / ( H5S_UNLIMITED )                        |
+|                |          }                                                  |
 |                |      }                                                      |
 +----------------+-------------------------------------------------------------+
