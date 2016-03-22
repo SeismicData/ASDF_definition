@@ -14,7 +14,7 @@
 import os
 
 
-VERSION = "0.0.2"
+VERSION = "1.0"
 
 # Some variables for all RST files.
 rst_epilog = """
