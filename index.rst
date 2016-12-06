@@ -1,6 +1,10 @@
 ASDF
 ====
 
+.. |br| raw:: html
+
+    <br />
+
 .. image:: images/asdf_logo.*
     :width: 80%
     :align: center
@@ -10,11 +14,18 @@ This is the formal definition of the *Adaptable Seismic Data Format*
 (**ASDF**).
 
 
+
+.. note:: **For more details please see our paper:**
+
+    *Lion Krischer, James Smith, Wenjie Lei, Matthieu Lefebvre, Youyi Ruan, Elliott Sales de Andrade, Norbert Podhorszki, Ebru Bozdağ and Jeroen Tromp* (2016), |br|
+    **An Adaptable Seismic Data Format**, |br|
+    Geophysical Journal International, 207(2). |br|
+    `http://dx.doi.org/10.1093/gji/ggw319 <http://dx.doi.org/10.1093/gji/ggw319>`_
+
+
 .. note::
 
     This document is for version |BOLDVERSION| of the format.
-
-.. note::
 
     This is the **A**\ daptable **S**\ eismic **D**\ ata **F**\ ormat - if you
     are looking for the **A**\ dvanced **S**\ cientific **D**\ ata **F**\
