@@ -14,6 +14,12 @@ This is the formal definition of the *Adaptable Seismic Data Format*
 
     This document is for version |BOLDVERSION| of the format.
 
+.. note::
+
+    This is **A**\ daptable **S**\ eismic **D**\ ata **F**\ ormat - if you are looking
+    for the **A**\ dvanced **S**\ cientific **D**\ ata **F**\ ormat, go here:
+    https://asdf.readthedocs.io/en/latest/
+
 
 For further information and contact information please see these two web sites:
 
