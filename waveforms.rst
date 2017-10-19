@@ -94,11 +94,11 @@ and overlaps. Gaps and overlaps are then represented by having multiple traces.
 Each station group can have an arbitrary number of traces and each trace can be
 arbitrarily long.
 
-Allowed data types are single and double precision two's complement signed
-integers and single and double precision IEEE 768 floating point numbers which
-happen to be the native data types on most platforms. HDF5 transparently deals
-with byte order issues so choose whichever endianness is most suitable for your
-platform.
+Allowed data types are half, single, and double precision two's complement
+signed integers and single and double precision IEEE 768 floating point numbers
+which happen to be the native data types on most platforms. HDF5 transparently
+deals with byte order issues so choose whichever endianness is most suitable
+for your platform.
 
 Data sets are named according to the scheme
 
@@ -149,7 +149,8 @@ and the exact pattern is specificed as a regular expression in the following tab
 +----------------+-----------------------------------------------------------------------+
 | **Data Type**  | ``H5T_IEEE_F32LE``, ``H5T_IEEE_F64LE``, ``H5T_IEEE_F32BE``,           |
 |                | ``H5T_IEEE_F64BE``, ``H5T_STD_I32LE``, ``H5T_STD_I64LE``,             |
-|                | ``H5T_STD_I32BE``, ``H5T_STD_I64BE``                                  |
+|                | ``H5T_STD_I32BE``, ``H5T_STD_I64BE``, ``H5T_STD_I16LE``,              |
+|                | ``H5T_STD_I16BE``                                                     |
 +----------------+-----------------------------------------------------------------------+
 | **Required**   | False                                                                 |
 +----------------+-----------------------------------------------------------------------+

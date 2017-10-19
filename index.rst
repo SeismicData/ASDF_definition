@@ -47,6 +47,18 @@ Additionally these pages and software projects are of further interest:
 * SEIS-PROV: http://seismicdata.github.io/SEIS-PROV/
 
 
+ASDF Format Changelog
+---------------------
+
+.. topic:: Version 1.0.1 (Oktober 19th, 2017)
+
+    * Allow little and big endian 16 bit integer waveform data.
+
+.. topic:: Version 1.0.0 (March 22nd, 2016)
+
+    * Initial ASDF version.
+
+
 .. toctree::
    :hidden:
    :maxdepth: 2
