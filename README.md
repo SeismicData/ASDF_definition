@@ -10,5 +10,6 @@ This repository contains the definition of the **A**daptable **S**eismic **D**at
 
 ### Rendered Definitions for the Different ASDF Format Versions:
 
+* Version 1.0.2: http://asdf-definition.readthedocs.io/en/1.0.2/
 * Version 1.0.1: http://asdf-definition.readthedocs.io/en/1.0.1/
 * Version 1.0.0: http://asdf-definition.readthedocs.io/en/1.0.0/
