@@ -50,6 +50,10 @@ Additionally these pages and software projects are of further interest:
 ASDF Format Changelog
 ---------------------
 
+.. topic:: Version 1.0.2 (March 1st, 2018)
+
+    * Allow adding very short waveforms that might start and end within the same second.
+
 .. topic:: Version 1.0.1 (Oktober 19th, 2017)
 
     * Allow little and big endian 16 bit integer waveform data.
