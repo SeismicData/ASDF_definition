@@ -50,6 +50,12 @@ Additionally these pages and software projects are of further interest:
 ASDF Format Changelog
 ---------------------
 
+.. topic:: Version 1.0.3 (September 24th, 2019)
+
+    * Allow all ASCII chars in the names of provenance data sets.
+    * Allow the following extra characters in the names of auxiliary data sets
+      and their path names: ``_\.!#$%&*+,:;<=>\?@\^~``
+
 .. topic:: Version 1.0.2 (March 1st, 2018)
 
     * Allow adding very short waveforms that might start and end within the same second.
